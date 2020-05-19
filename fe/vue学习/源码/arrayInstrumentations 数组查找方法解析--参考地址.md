@@ -1,0 +1,1 @@
+https://github.com/jiangjiu/blog-md/issues/56
