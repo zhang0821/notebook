@@ -7,8 +7,8 @@ Vue.js将DOM抽象成一个以JavaScript对象为节点的虚拟DOM树，以VNod
 修改以后经过diff算法得出一些需要修改的最小单位，再将这些小单位的视图进行更新。这样做减少了很多不需要的DOM操作，大大提高了性能。
 
 ###实现
-#### 最基础的VNode节点，作为其他派生VNode类的基类
-基类中初始化参量：记录当前节点的相关信息。eg：
+#### 基础：VNode 类，作为其他派生VNode类的基类
+基类constructor初始化参量：记录当前节点的相关信息。eg：
 
     tag: 当前节点的标签名
     data: 当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息
@@ -31,11 +31,14 @@ Vue.js将DOM抽象成一个以JavaScript对象为节点的虚拟DOM树，以VNod
 
 
 #### VNode相关的一些工具函数patch.js
-`sameVnode`: 两个VNode节点是否是同一个节点
+`sameVnode`: 判断两个VNode节点是否是同一个节点
 		
-		 key相同、tag（当前节点的标签名）相同、isComment（是否为注释节点）相同
-	是否data（当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息）都有定义
-	当标签是<input>的时候，type必须相同
+
+		 key相同、
+		 tag（当前节点的标签名）相同、
+		 isComment（是否为注释节点）相同
+		 是否data（当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息）都有定义
+		 当标签是<input>的时候，type必须相同（原因：某些浏览器不支持动态修改<input>类型，所以他们被视为不同类型）
 
 `createKeyToOldIdx`: 生成一个key与旧VNode的key对应的哈希表
 		
@@ -46,7 +49,8 @@ Vue.js将DOM抽象成一个以JavaScript对象为节点的虚拟DOM树，以VNod
 
 **`createPatchFunction`**: **创建patch方法**
 
-返回值： 一个patch函数
+
+	返回值： 一个patch函数
 
 
 
