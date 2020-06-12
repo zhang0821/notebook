@@ -1,3 +1,14 @@
+// 为对象绑定 before、after属性 是不是也满足绝大多数场景下对proxy的使用目的
+function send() {
+    console.log('send do');
+};
+
+send.prototype.before = () => {
+    console.log('send before');
+};
+
+send();
+
 // 纯proxy特性测试
 
 let a = [],
