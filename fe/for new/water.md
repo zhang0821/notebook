@@ -90,21 +90,96 @@ global attribute之一，其余还有：
 ### cookie和session的区别
 
 ### cookie、localStorage、sessionStorage的区别
+@ https://juejin.im/post/5ee83f10e51d4578975a7b8a#heading-12
+#### cookie
+    
+    HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自同一浏览器，如保持用户的登录状态。
+    Cookie 主要用于以下三个方面：
+    
+    会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）；个性化设置（如用户自定义设置、主题等）；浏览器行为跟踪（如跟踪分析用户行为等）。
+    Cookie 的特点：
+    
+    Cookie 的大小受限，一般为 4 KB；同一个域名下存放 Cookie 的个数是有限制的，不同浏览器的个数不一样，一般为 20 个；Cookie 支持设置过期时间，当过期时自动销毁；每次发起同域下的 HTTP 请求时，都会携带当前域名下的 Cookie；支持设置为 HttpOnly，防止 Cookie 被客户端的 JavaScript 访问。
+#### localStorage
+
+    一种持久化的存储方式，也就是说如果不手动清除，数据就永远不会过期。它是采用键值对的方式存储数据，按域名将数据分别保存到对应数据库文件里。相比 Cookie 来说，它能保存更大的数据。
+    localStorage 的特点：
+    
+    大小限制为 5MB ~10MB；在同源的所有标签页和窗口之间共享数据；数据仅保存在客户端，不与服务器进行通信；数据持久存在且不会过期，重启浏览器后仍然存在；对数据的操作是同步的。
+    
+#### sessionStorage
+
+    与服务端的 session 类似，sessionStorage 是一种会话级别的缓存，关闭浏览器时数据会被清除。需要注意的是 sessionStorage 的作用域是窗口级别的，也就是说不同窗口之间保存的 sessionStorage 数据是不能共享的。
+    sessionStorage 的特点：
+    
+    sessionStorage 的数据只存在于当前浏览器的标签页；数据在页面刷新后依然存在，但在关闭浏览器标签页之后数据就会被清除；与 localStorage 拥有统一的 API 接口；对数据的操作是同步的。
+#### Web SQL 数据库
+
+    Web SQL 数据库 API 实际上不是 HTML5 规范的一部分，而是一个单独的规范，它引入了一组 API 来使用 SQL 来操作客户端数据库。需要注意的是，HTML5 已经放弃 Web SQL 数据库。
+    Web SQL Database 规范中定义的三个核心方法：
+    
+    openDatabase：这个方法使用现有数据库或新建数据库来创建数据库对象；
+    transaction：这个方法允许我们根据情况控制事务的提交或回滚；
+    executeSql：这个方法用于执行真实的 SQL 语句。
+    
+    Web SQL 的特点（相比 Cookie、localStorage 与 sessionStorage）：
+    
+    Web SQL 能方便进行对象存储；Web SQL 支持事务，能方便地进行数据查询和数据处理操作。
+#### IndexedDB
+
+    IndexedDB 是一种底层 API，用于客户端存储大量结构化数据，包括文件、二进制大型对象。该 API 使用索引来实现对该数据的高性能搜索。虽然 Web Storage 对于存储较少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法不太好用。IndexedDB 提供了一个解决方案。
+    IndexedDB 的特点：
+    
+    存储空间大：存储空间可以达到几百兆甚至更多；支持二进制存储：它不仅可以存储字符串，而且还可以存储二进制数据；IndexedDB 有同源限制，每一个数据库只能在自身域名下能访问，不能跨域名访问；支持事务型：IndexedDB 执行的操作会按照事务来分组的，在一个事务中，要么所有的操作都成功，要么所有的操作都失败；键值对存储：IndexedDB 内部采用对象仓库（object store）存放数据。所有类型的数据都可以直接存入，包括 JavaScript 对象。对象仓库中，数据以 “键值对” 的形式保存，每一个数据记录都有对应的主键，主键是独一无二的，不能有重复，否则会抛出一个错误。数据操作是异步的：使用 IndexedDB 执行的操作是异步执行的，以免阻塞应用程序。
 
 ### js的数据类型
 
 ### 浮点精度丢失问题
 
 ### js的哪些方法可以修改作用域链
+这些方法一般都不要用
+1. eval() 函数
+2. with() 设置代码在特定对象中的作用域。将会指定的对象添加到作用域链中
+
+
+    var sMessage = "hello";
+    with(sMessage) {
+      alert(toUpperCase());	//输出 "HELLO"
+    }
+
+3. try-catch
+catch块，会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明
 
 ### ==和===的区别
 
-### 什么事事件冒泡、怎么阻止、利用事件冒泡可以干什么
-stopPreparation
+### 什么是事件冒泡、怎么阻止、利用事件冒泡可以干什么
+冒泡：p -> div -> body -> html -> document
+捕获： 反过来
+
+#### 阻止事件冒泡方法
+1. event.stopPropagation();
+    只阻止事件往上冒泡，不阻止事件本身
+
+2. 在事件处理函数中返回 false
+    需注意：return false 不仅阻止了事件往上冒泡，而且阻止了事件本身(默认事件)
+    
+
+        e.g:
+        $("#div1").mousedown(function(event){
+            var e=e||window.event;
+            return false;
+        });
+3. event.target==event.currentTarget
+做判断是否执行事件逻辑。让触发事件的元素等于绑定事件的元素，也可以阻止事件冒泡
+
+#### 利用事件冒泡可以干什么
+    事件代理（li标签点击事件）
 ### 如何阻止默认事件
 defaultPrevent（阻止的默认事件是这一类的：比如 右键鼠标，显示可操作菜单）
+1）event.preventDefault( )
+2）return false
 
-### 如何实现对象的克隆、深拷贝、浅拷贝问题
+### 如何实现对象的克隆(深拷贝、浅拷贝问题)
 
 ### forEach和map的区别
 map & forEach 都是遍历可迭代对象
@@ -156,7 +231,7 @@ if (!Array.prototype.forEach)
 
 ### new一个对象时，发生了什么
 
-### 什么时闭包、优缺点和使用场景
+### 什么是闭包、优缺点和使用场景
 
 ## css
 
@@ -186,6 +261,64 @@ WebFont 技术
 ### 简单说一下盒子模型
 
 ### 移动端适配
+
+
+    1px问题
+    UI图完美适配方案
+    iPhoneX适配方案
+    横屏适配
+    高清屏图片模糊问题
+    ...
+    
+meta viewport
+    `<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">`
+   
+   
+移动端适配方案:
+    方案1（不完美）：设置 width=device-width ,让布局视口等于理想视口(这时1个CSS像素就等于1个设备独立像素)
+    方案2：flexible方案
+        
+            在页面上统一使用rem来布局
+            核心换算：
+            function setRemUnit () {
+                var rem = docEl.clientWidth / 10
+                docEl.style.fontSize = rem + 'px'
+            }
+            
+            页面缩放后，要监测到重新换算
+            
+            window.addEventListener('resize', setRemUnit)window.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                  setRemUnit()
+                }
+            })
+            
+            借助PostCSS的px2rem插件即可
+            
+   方案3： vh、vw方案  
+   可借助PostCSS的 postcss-px-to-viewport
+
+横屏适配：
+js监测横屏：
+
+    window.addEventListener("resize", ()=>{
+        if (window.orientation === 180 || window.orientation === 0) { 
+          // 正常方向或屏幕旋转180度
+            console.log('竖屏');
+        };
+        if (window.orientation === 90 || window.orientation === -90 ){ 
+           // 屏幕顺时钟旋转90度或屏幕逆时针旋转90度
+            console.log('横屏');
+        }  
+    }); 
+css检测横屏：
+
+        @media screen and (orientation: portrait) {
+          /*竖屏...*/
+        } 
+        @media screen and (orientation: landscape) {
+          /*横屏...*/
+        }
 
 ### 如何让chrome支持小于12px
 通过缩放实现 `scale`
@@ -317,11 +450,71 @@ tips：scale属性只对可以定义宽高的元素有效
 ### 重绘和重排，以及优化问题
 
 ### cookie和token都放在header里面，为什么不会出现token劫持
-1、首先token不是防止XSS的，而是为了防止CSRF的；
-2、CSRF攻击的原因是浏览器会自动带上cookie，而浏览器不会自动带上token
+由于http的无状态性，为了使某个域名下的所有网页能够共享某些数据，session和cookie出现了。前后端访问流程如下：
+
+    首先，客户端会发送一个http请求到服务器端。
+    
+    服务器端接受客户端请求后，建立一个session，并发送一个http响应到客户端，这个响应头，
+    其中就包含Set-Cookie头部。该头部包含了sessionId。Set-Cookie格式如下：
+    Set-Cookie: value[; expires=date][; domain=domain][; path=path][; secure]
+    
+    在客户端发起的第二次请求，假如服务器给了set-Cookie，浏览器会自动在请求头中添加cookie
+    
+    服务器接收请求，分解cookie，验证信息，核对成功后返回response给客户端
+#### cookie + session 的结合使用，保活会话
+
+cookie只是实现session的其中一种方案。
+    
+    虽然是最常用的，但并不是唯一的方法。禁用cookie后还有其他方法存储，比如放在url中
+
+现在大多都是Session + Cookie，但是只用session不用cookie，或是只用cookie，不用session在理论上都可以保持会话状态。可是实际中因为多种原因，一般不会单独使用
+
+用session只需要在客户端保存一个id，实际上大量数据都是保存在服务端。
+如果全部用cookie，数据量大的时候客户端是没有那么多空间的。
+如果只用cookie不用session，那么账户信息全部保存在客户端，一旦被劫持，全部信息都会泄露。并且客户端数据量变大，网络传输的数据量也会变大
+
+#### token
+
+`token` 也称作令牌.
+组成: 由 `uid` + `time` + `sign[+固定参数]`
+    
+    uid: 用户唯一身份标识
+    time: 当前时间的时间戳
+    sign: 签名, 使用 hash/encrypt 压缩成定长的十六进制字符串，以防止第三方恶意拼接
+    固定参数(可选): 将一些常用的固定参数加入到 token 中是为了避免重复查库
+
+存放：在客户端一般存放于localStorage，cookie，或sessionStorage中。在服务器一般存于数据库中
+    
+#### token可以防御csrf，但是cookie+session 不行
+
+主要是因为token不会被浏览器主动的放在请求头中，而cookie会
+    
+    假如用户正在登陆银行网页，同时登陆了攻击者的网页，并且银行网页未对csrf攻击进行防护。
+    攻击者就可以在网页放一个表单，该表单提交src为http://www.bank.com/api/transfer，body为count=1000&to=Tom。
+    
+    倘若是session+cookie，用户打开网页的时候就已经转给Tom1000元了.因为form 发起的 POST 请求并不受到浏览器同源策略的限制，
+    因此可以任意地使用其他域的 Cookie 向其他域发送 POST 请求，形成 CSRF 攻击。
+    在post请求的瞬间，cookie会被浏览器自动添加到请求头中。
+    
+    但token不同，token是开发者为了防范csrf而特别设计的令牌，浏览器不会自动添加到headers里，
+    攻击者也无法访问用户的token，所以提交的表单无法通过服务器过滤，也就无法形成攻击。
 
 ### 如何实现token加密
+jwt？JSON Web Token（缩写 JWT）是目前最流行的跨域认证解决方案
+@see http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html
 
+JWT 的原理是，
+
+    服务器认证以后，生成一个 JSON 对象（保存相关登陆信息，保活时间等等），发回给用户
+    
+    以后，用户与服务端通信的时候，都要发回这个 JSON 对象。
+    （服务器完全只靠这个对象认定用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名）
+    （服务器就不保存任何 session 数据了，也就是说，服务器变成无状态了，从而比较容易实现扩展）
+    
+    客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。
+    此后，客户端每次与服务器通信，都要带上这个 JWT。åå
+    你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在` HTTP 请求的头`信息`Authorization`字段里面
+    另一种做法是，跨域的时候，JWT 就放在 POST 请求的数据体里面
 ### 输入一个网址，都发生了什么
 
 ### 什么是跨域，有哪些解决方案
