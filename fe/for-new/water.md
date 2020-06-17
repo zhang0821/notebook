@@ -330,6 +330,148 @@ if (!Array.prototype.forEach)
     函数内部调用外部的变量,就会形成闭包.
     
 ##### 闭包优缺点
+
+##### 闭包使用场景
+5. 柯里化
+
+4. 单例模式
+
+3. 处理回调函数
+    为每一个对象操作，绑定自己的一个全局定时器，（而不需要全局定义多个变量来存储）
+    
+    
+        function animateIt(elementId) {
+           var elem = document.getElementById(elementId);  
+           var tick = 0;
+           var timer = setInterval(function() { 
+            if (tick < 100) {
+             elem.style.left = elem.style.top = tick + "px";
+             tick++;
+            } 
+            else {
+             clearInterval(timer);
+             console.log(tick === 100, "Tick accessed via a closure.");
+             console.log(elem, "Element also accessed via a closure.");
+             console.log(timer, "Timer reference also obtained via a closure.");
+           }
+          }, 10);
+         }
+
+1. 模拟块级作用域(无论在什么地方，只要临时需要一些变量，就可以使用块级作用域)
+  只要不被其他函数引用，执行完就会被销毁，不会造成内存占用或者泄漏
+        
+        
+        (function(){
+            //块级作用域
+            // 对count引用
+            for(var i = 0; i < count; i++){
+                console.log(i); // 0, 1, ... count - 1
+            }
+        })();
+        
+        匿名函数就是一个闭包（尽管他是在全局声明的），通过自己引用自己的做法，减少闭包占用的内存问题，
+    
+2.闭包模拟私有变量
+
+    原本的一个普通对象
+    var per={
+        name:"jake",
+        age:20,
+        getName:function(){
+            return this.name
+        },
+        getAge:function(){
+            return this.age
+        }
+    } 
+    // 此时 外部可以直接修改 per 对象里面的参数,可以以闭包的形式做优化
+    function PER() {
+        let name = "jake";
+        this.getName = function(){
+            return name
+        }
+    } 
+@see https://juejin.im/post/5ec74c6a518825430956ae65
+#### 先理解一些概念
+   三种执行上下文：全局、函数、Eval 函数
+   
+   执行栈：先进后出原则
+   
+   执行上下文中的this：this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined(严格模式下)
+   
+   只有调用函数时，函数执行上下文才会被创建。
+   
+   变量提升的知识点：
+   
+        js引擎会检查当前作用域的所有变量声明及函数声明，在执行之前，var声明的变量已经绑定初始undefined，
+        而在let和const只绑定在了执行上下文中，但并未初始任何值，所以在声明之前调用则会抛出引用错误(即TDZ暂时性死区)，
+        这也就是函数声明与var声明在执行上下文中的提升。
+        
+        let const 也会存在变量提升，只是不会被初始化（而var申明的会被赋值undefined）
+        
+                let x = 'global';
+                
+                function func1(){
+                  console.log(x);//函数作用域内存在变量提升，**阻断了函数作用域链的向上延伸。
+                  let x = 'func';
+                }
+                
+                func1();
+        执行报错：Uncaught ReferenceError: Cannot access 'x' before initialization
+        说明这里是去查找的函数内的x，而不是外部的
+        
+   暂时性死区：
+        
+        let/const 仅仅发生了提升而没有被赋初值，而在显式赋值之前，任何对变量的读写都会触发ReferenceError 错误。
+        从代码块(block)起始到变量赋值以前的这块区域，称为该变量的暂时性死区。
+   块级作用域知识点：
+        
+        ES5 只有全局作用域和函数作用域，没有块级作用域。
+        
+        ES6 的块级作用域必须有大括号，如果没有大括号，JavaScript 引擎就认为不存在块级作用域。
+        
+        ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。
+        
+        允许在块级作用域内声明函数。函数声明类似于var，即会提升到全局作用域或函数作用域的头部。同时，函数声明还会提升到所在的块级作用域的头部。
+   
+   作用域链：  
+        作用域里面嵌套作用域,就形成了作用域链. 外部作用域无法访问内部的作用域
+    
+   词法作用域（静态）：
+        js查找是按照代码书写时候的位置来决定的，而不是按照调用时候位置
+        
+        例子：
+            var name = 'Mike'; //第一次定义name
+            function showName() {
+                console.log(name);  //输出 Mike 还是 Jay ？
+            }
+            
+            function changeName() {
+                var name = 'Jay'; //重新定义name
+                showName(); //调用showName()
+            }
+            changeName();
+        输出：mike
+        
+        解析，词法作用查找规则：
+            调用changeName()时,找到这个函数
+            定义var name = "Jay"
+            调用showName()
+            在changeName()里面查找是否有showName()这个方法,发现没有,向外层查找,找到了
+            调用console.log(name),在函数内部查找有没有name,没有,向外查找,找到了,name="Mike"
+            输出Mike
+   
+#### 闭包
+
+一种定义的表达：
+    当函数可以记住并访问所在的词法作用域时,就产生了闭包,即使函数是在当前词法作用域之外执行 ；
+红宝书定义：
+    闭包是指有权访问另一个 函数作用域中的变量的函数
+ 
+##### 闭包的形成：
+    函数内部调用外部的变量,就会形成闭包.
+    
+##### 闭包优缺点
 内存泄露
 造成场景：
    1。DOM 的事件绑定，移除 DOM 元素前如果忘记了注销掉其中绑定的事件方法，也会造成内存泄露
