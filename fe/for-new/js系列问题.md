@@ -1,4 +1,4 @@
-1. `typeof null` 为啥是object,`void 0`又是个啥？
+###1. `typeof null` 为啥是object,`void 0`又是个啥？
 
     
     undefined是声明了未定义,他不是一个关键字，可以被随意改动！！！
