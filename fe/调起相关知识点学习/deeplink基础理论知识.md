@@ -45,7 +45,25 @@ Android、iOS都推出了相应的概念去实现深链接。于是就有了Univ
 
 ### URL  Scheme
 
-### ULink
+### ULink概念
+
+[官方文档 >>](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html)
+
+### ulink短链方案概述
+方案一： ulink+token (端+口令平台)
+
+    demo： boxer.baidu.com/scheme?d=%5EGOEFQAc4mO%5E
+    
+    端识别提取query上的token，请求口令平台，拿到反解后的
+    scheme，进行跳转
+
+方案二：短码 （端+server端的ulink服务）
+
+    DEMO：a.baidu.com/a/sdeji 
+    
+    端提取二级path的短码，ulink server对短码进行反解到scheme，然后端根绝
+    scheme进行跳转    
+
 
 `前言：Custom URL Scheme`
 iOS在之前的很长一段时间内用来实现deep linking以及app间通信的方法就是上面提到的，被叫做custom URL scheme。
