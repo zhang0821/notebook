@@ -18,7 +18,8 @@ Defer a task to execute it asynchronously 将一个立即执行函数延迟到�
 
 可以使用的有：task、microtask， 二者的区别在于：
 
-		根据 HTML Standard，在每个 task 运行完以后，UI 都会重渲染，那么在 microtask 中就完成数据更新，当前 task 结束就可以得到最新的 UI 了。
+		根据 HTML Standard，在每个 task 运行完以后，UI 都会重渲染，
+		那么在 microtask 中就完成数据更新，当前 task 结束就可以得到最新的 UI 了。
 		反之如果新建一个 task 来做数据更新，那么渲染就会进行两次。
 
 ####这个被推入microtask的timerFunc的实现方式选取

@@ -1,28 +1,4 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [html](#html)
-  - [为什么标签需要语义化](#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A0%87%E7%AD%BE%E9%9C%80%E8%A6%81%E8%AF%AD%E4%B9%89%E5%8C%96)
-  - [script 设置defer和async的区别](#script-%E8%AE%BE%E7%BD%AEdefer%E5%92%8Casync%E7%9A%84%E5%8C%BA%E5%88%AB)
-  - [image标签上 title和alt的区别](#image%E6%A0%87%E7%AD%BE%E4%B8%8A-title%E5%92%8Calt%E7%9A%84%E5%8C%BA%E5%88%AB)
-  - [页面样式导入，import和link的区别](#%E9%A1%B5%E9%9D%A2%E6%A0%B7%E5%BC%8F%E5%AF%BC%E5%85%A5import%E5%92%8Clink%E7%9A%84%E5%8C%BA%E5%88%AB)
-- [js](#js)
-  - [给dom绑定事件的方法有哪些](#%E7%BB%99dom%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B)
-  - [判断一个变量为数组](#%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E4%B8%BA%E6%95%B0%E7%BB%84)
-  - [cookie和session的区别](#cookie%E5%92%8Csession%E7%9A%84%E5%8C%BA%E5%88%AB)
-  - [cookie、localStorage、sessionStorage的区别](#cookielocalstoragesessionstorage%E7%9A%84%E5%8C%BA%E5%88%AB)
-  - [js的数据类型](#js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
-  - [浮点精度丢失问题](#%E6%B5%AE%E7%82%B9%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98)
-  - [js的哪些方法可以修改作用域链](#js%E7%9A%84%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE)
-  - [==和===的区别](#%E5%92%8C%E7%9A%84%E5%8C%BA%E5%88%AB)
-  - [什么事事件冒泡、怎么阻止、利用事件冒泡可以干什么](#%E4%BB%80%E4%B9%88%E4%BA%8B%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E6%80%8E%E4%B9%88%E9%98%BB%E6%AD%A2%E5%88%A9%E7%94%A8%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%8F%AF%E4%BB%A5%E5%B9%B2%E4%BB%80%E4%B9%88)
-  - [如何阻止默认事件](#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E9%BB%98%E8%AE%A4%E4%BA%8B%E4%BB%B6)
-  - [如何实现对象的克隆、深拷贝、浅拷贝问题](#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%8B%E9%9A%86%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98)
-  - [forEach和map的区别](#foreach%E5%92%8Cmap%E7%9A%84%E5%8C%BA%E5%88%AB)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
+[TOC]
 ## html
 ### 为什么标签需要语义化
 1。 更加标准化，让机器更懂HTML。（爬虫（seo））
@@ -56,20 +32,20 @@ global attribute之一，其余还有：
 ### 页面样式导入，import和link的区别
 1. 提供方不同
 
-    
+  
     @import是 CSS 提供的语法规则，只有导入样式表的作用；
     
     link是HTML提供的标签，不仅可以加载 CSS 文件，还可以定义 RSS、rel 连接属性
 2. 网页加载顺序不同
 
-    
+  
     @import是在页面加载完成后才加载
     
     link是在加载页面时，进行同步加载的
     
 3. 兼容性区别
 
-    
+  
     link没有兼容性问题
     
     import是css2.1才有的属性。
@@ -92,7 +68,7 @@ global attribute之一，其余还有：
 ### cookie、localStorage、sessionStorage的区别
 @ https://juejin.im/post/5ee83f10e51d4578975a7b8a#heading-12
 #### cookie
-    
+
     HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自同一浏览器，如保持用户的登录状态。
     Cookie 主要用于以下三个方面：
     
@@ -106,7 +82,7 @@ global attribute之一，其余还有：
     localStorage 的特点：
     
     大小限制为 5MB ~10MB；在同源的所有标签页和窗口之间共享数据；数据仅保存在客户端，不与服务器进行通信；数据持久存在且不会过期，重启浏览器后仍然存在；对数据的操作是同步的。
-    
+
 #### sessionStorage
 
     与服务端的 session 类似，sessionStorage 是一种会话级别的缓存，关闭浏览器时数据会被清除。需要注意的是 sessionStorage 的作用域是窗口级别的，也就是说不同窗口之间保存的 sessionStorage 数据是不能共享的。
@@ -209,7 +185,7 @@ map & forEach 都是遍历可迭代对象
 
 2. 速度快慢区别
  map 比 forEach 快？这个实验后，发现是不确定的。而且对于现代浏览器来说，这点小差别其实无关紧要，但是肯定的是，它们都比 for 循环慢
- 
+
  为什么原生的foreach和map的操作函数，都比for循环慢？ 查询它们内部的额源码可以发现，
  forEach在内部包含许多检查，并不像简单的循环那样简单,例如下面的源码
  ```js
@@ -235,7 +211,7 @@ if (!Array.prototype.forEach)
     }
   };
 }
-```
+ ```
 // todo
 ### 实现一个简单限流方案（防抖和节流）（500ms内 点击只触发一次）
 
@@ -252,15 +228,15 @@ if (!Array.prototype.forEach)
 @see https://juejin.im/post/5ec74c6a518825430956ae65
 #### 先理解一些概念
    三种执行上下文：全局、函数、Eval 函数
-   
+
    执行栈：先进后出原则
-   
+
    执行上下文中的this：this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined(严格模式下)
-   
+
    只有调用函数时，函数执行上下文才会被创建。
-   
+
    变量提升的知识点：
-   
+
         js引擎会检查当前作用域的所有变量声明及函数声明，在执行之前，var声明的变量已经绑定初始undefined，
         而在let和const只绑定在了执行上下文中，但并未初始任何值，所以在声明之前调用则会抛出引用错误(即TDZ暂时性死区)，
         这也就是函数声明与var声明在执行上下文中的提升。
@@ -277,7 +253,7 @@ if (!Array.prototype.forEach)
                 func1();
         执行报错：Uncaught ReferenceError: Cannot access 'x' before initialization
         说明这里是去查找的函数内的x，而不是外部的
-        
+
    暂时性死区：
         
         let/const 仅仅发生了提升而没有被赋初值，而在显式赋值之前，任何对变量的读写都会触发ReferenceError 错误。
@@ -291,7 +267,7 @@ if (!Array.prototype.forEach)
         ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。
         
         允许在块级作用域内声明函数。函数声明类似于var，即会提升到全局作用域或函数作用域的头部。同时，函数声明还会提升到所在的块级作用域的头部。
-   
+
    作用域链：  
         作用域里面嵌套作用域,就形成了作用域链. 外部作用域无法访问内部的作用域
     
@@ -318,17 +294,17 @@ if (!Array.prototype.forEach)
             在changeName()里面查找是否有showName()这个方法,发现没有,向外层查找,找到了
             调用console.log(name),在函数内部查找有没有name,没有,向外查找,找到了,name="Mike"
             输出Mike
-   
+
 #### 闭包
 
 一种定义的表达：
     当函数可以记住并访问所在的词法作用域时,就产生了闭包,即使函数是在当前词法作用域之外执行 ；
 红宝书定义：
     闭包是指有权访问另一个 函数作用域中的变量的函数
- 
+
 ##### 闭包的形成：
     函数内部调用外部的变量,就会形成闭包.
-    
+
 ##### 闭包优缺点
 
 ##### 闭包使用场景
@@ -370,7 +346,8 @@ if (!Array.prototype.forEach)
         })();
         
         匿名函数就是一个闭包（尽管他是在全局声明的），通过自己引用自己的做法，减少闭包占用的内存问题，
-    
+  
+
 2.闭包模拟私有变量
 
     原本的一个普通对象
@@ -394,15 +371,15 @@ if (!Array.prototype.forEach)
 @see https://juejin.im/post/5ec74c6a518825430956ae65
 #### 先理解一些概念
    三种执行上下文：全局、函数、Eval 函数
-   
+
    执行栈：先进后出原则
-   
+
    执行上下文中的this：this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined(严格模式下)
-   
+
    只有调用函数时，函数执行上下文才会被创建。
-   
+
    变量提升的知识点：
-   
+
         js引擎会检查当前作用域的所有变量声明及函数声明，在执行之前，var声明的变量已经绑定初始undefined，
         而在let和const只绑定在了执行上下文中，但并未初始任何值，所以在声明之前调用则会抛出引用错误(即TDZ暂时性死区)，
         这也就是函数声明与var声明在执行上下文中的提升。
@@ -419,7 +396,7 @@ if (!Array.prototype.forEach)
                 func1();
         执行报错：Uncaught ReferenceError: Cannot access 'x' before initialization
         说明这里是去查找的函数内的x，而不是外部的
-        
+
    暂时性死区：
         
         let/const 仅仅发生了提升而没有被赋初值，而在显式赋值之前，任何对变量的读写都会触发ReferenceError 错误。
@@ -433,7 +410,7 @@ if (!Array.prototype.forEach)
         ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。
         
         允许在块级作用域内声明函数。函数声明类似于var，即会提升到全局作用域或函数作用域的头部。同时，函数声明还会提升到所在的块级作用域的头部。
-   
+
    作用域链：  
         作用域里面嵌套作用域,就形成了作用域链. 外部作用域无法访问内部的作用域
     
@@ -460,17 +437,17 @@ if (!Array.prototype.forEach)
             在changeName()里面查找是否有showName()这个方法,发现没有,向外层查找,找到了
             调用console.log(name),在函数内部查找有没有name,没有,向外查找,找到了,name="Mike"
             输出Mike
-   
+
 #### 闭包
 
 一种定义的表达：
     当函数可以记住并访问所在的词法作用域时,就产生了闭包,即使函数是在当前词法作用域之外执行 ；
 红宝书定义：
     闭包是指有权访问另一个 函数作用域中的变量的函数
- 
+
 ##### 闭包的形成：
     函数内部调用外部的变量,就会形成闭包.
-    
+
 ##### 闭包优缺点
 内存泄露
 造成场景：
@@ -525,7 +502,8 @@ if (!Array.prototype.forEach)
         })();
         
         匿名函数就是一个闭包（尽管他是在全局声明的），通过自己引用自己的做法，减少闭包占用的内存问题，
-    
+  
+
 2.闭包模拟私有变量
 
     原本的一个普通对象
@@ -560,7 +538,7 @@ if (!Array.prototype.forEach)
     当我把网页上的所有图标都对应一个字符的时候，你在代码里输入某个字符，那这个字符就显示你规定的形状，这就是 iconfont 图标。
     
     把所有的图标都放在一个字体里面，就是一个字体库了，然后按照正常字体库（本来就是正常的字体库）调用就行了。
-    
+
 WebFont 技术
     可以让网页使用在线字体，在国外，WebFont 已经非常流行了，英文字体只有26个字母，一套字体不过几十 KB ，
     而汉字却有数万个，导致字体文件通常有好几 MB 大小，再加上国内的网络环境，显然不现实。
@@ -581,11 +559,11 @@ WebFont 技术
     横屏适配
     高清屏图片模糊问题
     ...
-    
+
 meta viewport
     `<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;">`
-   
-   
+
+
 移动端适配方案:
     方案1（不完美）：设置 width=device-width ,让布局视口等于理想视口(这时1个CSS像素就等于1个设备独立像素)
     方案2：flexible方案
@@ -606,7 +584,7 @@ meta viewport
             })
             
             借助PostCSS的px2rem插件即可
-            
+
    方案3： vh、vw方案  
    可借助PostCSS的 postcss-px-to-viewport
 
@@ -645,7 +623,7 @@ tips：scale属性只对可以定义宽高的元素有效
         -o-transform: scale(1); //针对能识别-webkit的opera browser设置  
         display: inline-block;
     }
-   
+
 
 ### 移动端1px问题
 
@@ -656,11 +634,11 @@ tips：scale属性只对可以定义宽高的元素有效
          DPR: 默认缩放为100%的情况下，设备像素和CSS像素的比值 `window.devicePixelRatio=物理像素 /CSS像素`
    目前，主流的屏幕的DPR=2，iphone8p为3，
    以二倍屏(DPR=2)为例子,要实现物理像素 1px:
-   
+
         则css的像素为 1/2=0.5 
         以750的视觉稿（也就是代表：视觉稿的1px是以750为参考的，则css样式是以设备375为参照的。所以css的值写0.5px）
         0.5px的像素是否能显示？` iOS 8+系统支持，安卓系统不支持`
-        
+
 解决方案：
 
     1.WWDC对iOS统给出的方案:支持iOS 8+下，写0.5px是可以识别的。
@@ -669,7 +647,7 @@ tips：scale属性只对可以定义宽高的元素有效
     2.使用边框图片
         border: 1px solid transparent;
         border-image: url('./../../image/96.jpg') 2 repeat;
-
+    
     3.使用box-shadow实现（推荐2）
         box-shadow: 0  -1px 1px -1px #e5e5e5,   //上边线
                     1px  0  1px -1px #e5e5e5,   //右边线
@@ -726,7 +704,7 @@ tips：scale属性只对可以定义宽高的元素有效
               var docEl = document.documentElement;
               var fontsize = 32* (docEl.clientWidth / 750) + 'px';
               docEl.style.fontSize = fontsize;
-                
+
 ### style协议，body前和body后有什么区别
 
 主要还是涉及到浏览器的渲染机制。页面渲染css多次被覆盖，重新渲染的效能问题。
@@ -736,11 +714,11 @@ tips：scale属性只对可以定义宽高的元素有效
 写在body后的弊端：先加载标签， 然后渲染样式。 如果加载慢的话， 你会看到他会跳舞
 
       由于浏览器以逐行方式对html文档进行解析；
-
+    
       当解析到写在尾部的样式表（外联或写在style标签）会导致浏览器停止之前的渲染，等待加载且解析样式表完成之后重新渲染；
-
+    
       在windows的IE下可能会出现FOUC现象（即样式失效导致的页面闪烁问题）；
-      
+
 
 ### box-sizing设置border-box后有什么影响
 
@@ -961,7 +939,7 @@ HTTP/1.1：通过引入Chunk transfer机制来解决这个问题。服务器会�
     1.  增加了持久连接;
     2.  浏览器为每个域名最多同时维护6个TCP持久连接; 
     3.  使用CDN的实现域名分片机制。
-    
+
 1.1 核心缺点：HTTP/1.1对带宽的利用率却并不理想
 
 原因：
@@ -1007,7 +985,7 @@ HTTP/1.1：通过引入Chunk transfer机制来解决这个问题。服务器会�
     那么其他的5个连接依然可以继续传 输数据。所以随着丢包率的增加，HTTP/2的传输效率也会越来越差。
  2。 TCP建立连接的延时
  三次握手的网络延时，tcp的1.5个RTT和https中需要的TSL链接产生的1～2个RTT
- 
+
  #### 新的协议：quic协议！——基于udp
 HTTP/3选择了一个折衷的方法——UDP协议，基于UDP实现了类似于 TCP的多路数据流、传输可靠性等功能，我们把这套功能称为QUIC协议。   
 
@@ -1023,7 +1001,7 @@ QUIC在UDP的基础之上，增加了一层来保证数据可靠性传输。它�
     就是 当收到一个优先级高的请求时，
     比如接收到JavaScript或者CSS关键资源的请求，
     服务器可以暂停之前的请 求来优先处理关键资源的请求
-    
+
 `多路复用的实现`
 通过引入`二进制分帧制`,实现了HTTP的多路复用技术
 
@@ -1032,13 +1010,13 @@ QUIC在UDP的基础之上，增加了一层来保证数据可靠性传输。它�
     这些数据经过二进制分帧层处理之后，会被转换为一个个带有请求ID编号的帧，通过协议栈将这些帧发送 给服务器。
     
     服务器接收到所有帧之后，会将所有相同ID的帧合并为一条完整的请求信息。
-   
+       
     然后服务器处理该条请求，并将处理的响应行、响应头和响应体分别发送至二进制分帧层。
     
     同样，二进制分帧层会将这些响应数据转换为一个个带有请求ID编号的帧，经过协议栈发送给浏览器。
     
     浏览器接收到响应帧之后，会根据ID编号将帧的数据提交给对应的请求。
-    
+
 基于二进制分帧层，HTTP/2还附带实现了很多其他功能
 
     1.可以设置请求的优先级
