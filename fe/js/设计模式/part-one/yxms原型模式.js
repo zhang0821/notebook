@@ -17,6 +17,7 @@ planet.blood = {
     test2: 200
 };
 planet.level = 100;
+console.log('planet', planet)
 
 Object.create = Object.create || function(obj) {
     let F = function(){};
@@ -29,7 +30,7 @@ console.log('clonePlanet', clonePlanet.blood);
 console.log('clonePlanet', clonePlanet.level);
 
 // 基于原型链的委托机制就是原型继承的本质
-/** 
+/**
  * 1.除了跟对象Object.prototype以外,任何对象都有一个原型
  * 2.Object.create(null)可以创建一个没有原型的对象
 */

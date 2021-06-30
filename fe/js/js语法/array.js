@@ -15,6 +15,13 @@ TEST_ARR[1] = undefined;
 console.log('TEST_ARR', TEST_ARR, 'len:', TEST_ARR.length);
 
 
-const collectionTypes = new Set<Function>([Set, Map, WeakMap, WeakSet])
+const collectionTypes = new Set<Function>([Set, Map, WeakMap, WeakSet]);
 console.log('collectionTypes', collectionTypes);
 console.log('TEST_ARR constructor', TEST_ARR.constructor);
+
+// sort
+
+let sortArr = [11,3,5,1,9,10];
+let sortedArr = sortArr.sort();
+console.log('sortArr', sortArr, 'sortedArr', sortedArr);
+
